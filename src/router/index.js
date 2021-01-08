@@ -36,7 +36,53 @@ export const constantRouterMap = [
       component: () => import('@/views/dashboard/index')
     }]
   },
+  {
+    path: '/basicInfo',
+    component: Layout,
+    redirect: '/example/table',
+    name: 'Example',
+    meta: { title: '基本信息管理', icon: 'example' },
+    children: [
+      {
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/table/index'),
+        meta: { title: '城市管理', icon: 'table' }
+      },
+      {
+        path: 'tree',
+        name: 'Tree',
+        component: () => import('@/views/tree/index'),
+        meta: { title: '标签管理', icon: 'tree' }
+      }
+    ]
+  },
 
+  //活动管理
+  {
+    path: '/gathering',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Form',
+        component: () => import('@/views/table/gathering'),
+        meta: { title: '活动管理', icon: 'form' }
+      }
+    ]
+  },
+
+
+
+
+
+
+
+  /**
+   * ***********************************************************************************************************************
+   * ************************************************这个是项目自带的几个模块************************************************
+   * ***********************************************************************************************************************
+   */
   {
     path: '/example',
     component: Layout,
@@ -131,6 +177,11 @@ export const constantRouterMap = [
   },
 
   { path: '*', redirect: '/404', hidden: true }
+  /**
+   * ***********************************************************************************************************************
+   * ************************************************这个是项目自带的模块结束************************************************
+   * ***********************************************************************************************************************
+   */
 ]
 
 export default new Router({
