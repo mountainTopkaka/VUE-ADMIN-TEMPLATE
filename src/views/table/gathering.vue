@@ -1,6 +1,8 @@
 <template>
+<div>
     <el-table
     :data="dataList"
+    :height="tableHeight"
     border
     style="width: 100%">
     <el-table-column
@@ -33,6 +35,18 @@
       label="结束日期">
     </el-table-column>
   </el-table>
+
+  <el-pagination
+      @size-change="fetchData"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[5, 10, 20]"
+      :page-size="5"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total">
+    </el-pagination>
+
+</div>
 </template>
 
 <script>
@@ -41,6 +55,7 @@ import gatheringApi from '@/api/gathering'
 export default {
     data(){
         return{
+            tableHeight:null,
             dataList:[],
             total:0,
             currentPage:1,
@@ -50,8 +65,20 @@ export default {
         
     },
     created(){
-        this.fetchData()
+      debugger;
+        this.fetchData();
+        let that = this
+        that.tableHeight = window.innerHeight-90;
     },
+    mounted () {
+    const that = this
+    window.onresize = () => {
+      return (() => {
+        let heightStyle = that.$refs.tableCot.offsetHeight
+        that.tableHeight = window.innerHeight-90;
+      })()
+    }
+  },
     methods:{
         fetchData() {
 
@@ -68,12 +95,18 @@ export default {
             }) */
             
             // 分页查询 search(1,10,{})
-            debugger;
             gatheringApi.search(that.currentPage,that.pageSize,that.queryMap).then(function(response){
                 // 钩子中，有时候this不顶用，所以使用that转换下
                 that.dataList=response.data.rows;
                 that.total = response.data.total;
+
+                that.tableHeight = window.innerHeight-90;
+
             }) 
+        },
+        handleCurrentChange(val) {
+          this.currentPage=val;
+          this.fetchData();
         }
     }
 
