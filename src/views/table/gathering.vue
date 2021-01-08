@@ -1,5 +1,19 @@
 <template>
 <div>
+  <br>
+    <el-form inline>
+      <el-form-item label="活动名称" >
+        <el-input placeholder="活动名称" v-model="queryMap.name"></el-input>
+      </el-form-item>
+
+      <el-form-item label="活动时间">
+        <el-date-picker type="date" placeholder="选择日期" v-model="queryMap.starttimeBegin" ></el-date-picker>
+        <el-date-picker type="date" placeholder="选择日期" v-model="queryMap.starttimeEnd"  ></el-date-picker>
+      </el-form-item>
+
+      <el-button @click="fetchData()" type="primary">查询</el-button>
+    </el-form>
+
     <el-table
     :data="dataList"
     :height="tableHeight"
@@ -56,6 +70,7 @@ export default {
     data(){
         return{
             tableHeight:null,
+            tableHeightSuffix:170,
             dataList:[],
             total:0,
             currentPage:1,
@@ -68,14 +83,14 @@ export default {
       debugger;
         this.fetchData();
         let that = this
-        that.tableHeight = window.innerHeight-90;
+        that.tableHeight = window.innerHeight-that.tableHeightSuffix;
     },
     mounted () {
     const that = this
     window.onresize = () => {
       return (() => {
         let heightStyle = that.$refs.tableCot.offsetHeight
-        that.tableHeight = window.innerHeight-90;
+        that.tableHeight = window.innerHeight-that.tableHeightSuffix;
       })()
     }
   },
@@ -100,7 +115,7 @@ export default {
                 that.dataList=response.data.rows;
                 that.total = response.data.total;
 
-                that.tableHeight = window.innerHeight-90;
+                that.tableHeight = window.innerHeight-that.tableHeightSuffix;
 
             }) 
         },
