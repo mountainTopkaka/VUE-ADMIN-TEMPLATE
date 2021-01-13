@@ -49,6 +49,17 @@
       prop="endtime"
       label="结束日期">
     </el-table-column>
+
+    <el-table-column
+      fixed="right"
+      label="操作"
+      width="100">
+      <template slot-scope="scope">
+        <el-button @click="handleEdit(scope.row.id)" type="text" size="small">修改</el-button>
+        <!-- <el-button type="text" size="small">编辑</el-button> -->
+      </template>
+    </el-table-column>
+
   </el-table>
 
   <el-pagination
@@ -203,6 +214,21 @@ export default {
               that.fetchData();
             }
           });
+        },
+        handleEdit(id){
+          var that = this;
+          gatheringApi.getById(id).then(response=>{
+            if(response.flag) {
+              that.pojo = response.data;
+              if(that.pojo.state) {
+                that.pojo.state="1";
+              } else {
+                that.pojo.state="0";
+              }
+              that.dialogVisible=true;
+            }
+            
+          }); 
         }
     }
 

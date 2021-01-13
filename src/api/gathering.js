@@ -31,6 +31,16 @@ export default{
         );
     },
 
+    getById(id){
+        // ES 6 模板方法
+        return request(
+            {
+                url:`/gathering/gathering/${id}`,
+                method:'get',
+            }
+        );
+    },
+
     save(pojo) {
         return request(
             {
