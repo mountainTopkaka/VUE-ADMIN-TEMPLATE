@@ -12,6 +12,7 @@
       </el-form-item>
 
       <el-button @click="fetchData()" type="primary">查询</el-button>
+      <el-button @click="dialogVisible = true" type="primary">新增</el-button>
     </el-form>
 
     <el-table
@@ -60,6 +61,12 @@
       :total="total">
     </el-pagination>
 
+    <el-dialog
+      title="编辑" :visible.sync="dialogVisible"
+    >
+
+    </el-dialog>
+
 </div>
 </template>
 
@@ -75,7 +82,8 @@ export default {
             total:0,
             currentPage:1,
             pageSize:10,
-            queryMap:{}
+            queryMap:{},
+            dialogVisible:false
         }
         
     },
@@ -115,6 +123,7 @@ export default {
                 that.dataList=response.data.rows;
                 that.total = response.data.total;
 
+                // 每次查询或者其他操作完后，需要重新设置下表格高度
                 that.tableHeight = window.innerHeight-that.tableHeightSuffix;
 
             }) 
