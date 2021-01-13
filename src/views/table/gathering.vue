@@ -12,7 +12,7 @@
       </el-form-item>
 
       <el-button @click="fetchData()" type="primary">查询</el-button>
-      <el-button @click="dialogVisible = true" type="primary">新增</el-button>
+      <el-button @click="dialogInit()" type="primary">新增</el-button>
     </el-form>
 
     <el-table
@@ -64,7 +64,56 @@
     <el-dialog
       title="编辑" :visible.sync="dialogVisible"
     >
+      <el-form label-width="80px">
+        <el-form-item label="活动名称"> 
+          <el-input v-model="pojo.name" placeholder="活动名称" />
+        </el-form-item>
 
+        <el-form-item label="主办方"> 
+          <el-input v-model="pojo.sponsor" placeholder="主办方" />
+        </el-form-item>
+
+        <el-form-item label="活动地址"> 
+          <el-input v-model="pojo.address" placeholder="活动地址" />
+        </el-form-item>
+
+
+        <el-form-item label="开始日期"> 
+          <el-date-picker type="date" v-model="pojo.starttime" placeholder="开始日期" />
+        </el-form-item>
+
+
+        <el-form-item label="结束日期"> 
+          <el-date-picker type="date" v-model="pojo.endtime" placeholder="结束日期" />
+        </el-form-item>
+
+
+        <el-form-item label="活动详情"> 
+          <el-input type="textarea" v-model="pojo.detail" placeholder="活动详情" />
+        </el-form-item>
+
+        <el-form-item label="选择城市">
+          <el-select v-model="pojo.city"  placeholder="选择城市">
+            <!-- : v-bind的缩写，会变化的属性一般会添加冒号 -->
+            <el-option 
+              v-for="item in cityList"
+              :key="item.id"
+              :label="item.name"
+              v-bind:value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="是否可见"> 
+          <el-switch active-value="1" inactive-value="0" v-model="pojo.state" />
+        </el-form-item>
+        
+        <el-form-item>
+          <el-button @click="handleSave()" type="primary">保存</el-button>
+          <el-button @click="dialogVisible = false" >关闭</el-button>
+        </el-form-item>
+      </el-form>
     </el-dialog>
 
 </div>
@@ -72,7 +121,7 @@
 
 <script>
 import gatheringApi from '@/api/gathering'
-
+import cityApi from '@/api/city'
 export default {
     data(){
         return{
@@ -83,16 +132,20 @@ export default {
             currentPage:1,
             pageSize:10,
             queryMap:{},
-            dialogVisible:false
+            dialogVisible:false,
+            pojo:{},
+            cityList:[]
         }
         
     },
+
     created(){
       debugger;
         this.fetchData();
         let that = this
         that.tableHeight = window.innerHeight-that.tableHeightSuffix;
     },
+
     mounted () {
     const that = this
     window.onresize = () => {
@@ -131,6 +184,25 @@ export default {
         handleCurrentChange(val) {
           this.currentPage=val;
           this.fetchData();
+        },
+        dialogInit() {
+          this.dialogVisible = true;
+          var that = this;
+          cityApi.getList().then(function(response){
+            that.cityList=response.data;
+            // 初始化
+            // that.pojo=[];
+          });
+        },
+        handleSave() {
+          var that = this;
+          gatheringApi.save(this.pojo).then(response=>{
+            if(response.flag) {
+              that.pojo=[];
+              that.dialogVisible=false;
+              that.fetchData();
+            }
+          });
         }
     }
 

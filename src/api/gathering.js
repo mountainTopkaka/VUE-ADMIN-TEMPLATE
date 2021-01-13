@@ -30,6 +30,16 @@ export default{
             }
         );
     },
+
+    save(pojo) {
+        return request(
+            {
+                url:'/gathering/gathering',
+                method:'post',
+                data:pojo
+            }
+        );
+    }
 } 
 // import gatheringApi from "@/api/gathering"
 // gatheringApi.getList
