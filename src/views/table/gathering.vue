@@ -12,7 +12,7 @@
       </el-form-item>
 
       <el-button @click="fetchData()" type="primary">查询</el-button>
-      <el-button @click="dialogInit()" type="primary">新增</el-button>
+      <el-button @click="handleAdd()" type="primary">新增</el-button>
     </el-form>
 
     <el-table
@@ -55,7 +55,7 @@
       label="操作"
       width="100">
       <template slot-scope="scope">
-        <el-button @click="handleEdit(scope.row.id)" type="text" size="small">修改</el-button>
+        <el-button @click="handleEdit(scope.row.id)" type="text" size="small">编辑</el-button>
         <!-- <el-button type="text" size="small">编辑</el-button> -->
       </template>
     </el-table-column>
@@ -196,15 +196,7 @@ export default {
           this.currentPage=val;
           this.fetchData();
         },
-        dialogInit() {
-          this.dialogVisible = true;
-          var that = this;
-          cityApi.getList().then(function(response){
-            that.cityList=response.data;
-            // 初始化
-            // that.pojo=[];
-          });
-        },
+        
         handleSave() {
           var that = this;
           gatheringApi.save(this.pojo).then(response=>{
@@ -215,6 +207,17 @@ export default {
             }
           });
         },
+
+        handleAdd() {
+          var that = this;
+          cityApi.getList().then(function(response){
+            that.cityList=response.data;
+            // 初始化
+            that.pojo=[];
+            that.dialogVisible = true;
+          });
+        },
+
         handleEdit(id){
           var that = this;
           gatheringApi.getById(id).then(response=>{
