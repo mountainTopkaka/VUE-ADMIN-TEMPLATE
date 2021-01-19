@@ -198,14 +198,33 @@ export default {
         },
         
         handleSave() {
+         
           var that = this;
           gatheringApi.save(this.pojo).then(response=>{
             if(response.flag) {
+              
               that.pojo=[];
               that.dialogVisible=false;
               that.fetchData();
-            }
+
+              // this.$message({
+              //   message: response.message,
+              //   type: 'success'
+              // });
+            } 
+            // else {
+            //   this.$message({
+            //     message: response.message,
+            //     type: 'error'
+            //   });
+            // }
+
+            this.$message({
+                message: response.message,
+                type: response.flag?'success':'error'
+              });
           });
+          //  window.alert("ok123");
         },
 
         handleAdd() {
