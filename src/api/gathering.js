@@ -49,6 +49,16 @@ export default{
                 data:pojo
             }
         );
+    },
+
+    deleteById(id){
+        // ES 6 模板方法
+        return request(
+            {
+                url:`/gathering/gathering/${id}`,
+                method:'delete',
+            }
+        );
     }
 } 
 // import gatheringApi from "@/api/gathering"

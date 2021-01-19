@@ -56,6 +56,8 @@
       width="100">
       <template slot-scope="scope">
         <el-button @click="handleEdit(scope.row.id)" type="text" size="small">编辑</el-button>
+        <el-button @click="handleDelete(scope.row.id)" type="text" size="small">删除</el-button>
+        
         <!-- <el-button type="text" size="small">编辑</el-button> -->
       </template>
     </el-table-column>
@@ -251,6 +253,29 @@ export default {
             }
             
           }); 
+        },
+        handleDelete(id) {
+          let that = this;
+          this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+          }).then(() => {
+            gatheringApi.deleteById(id).then(response=>{
+              this.$message({
+                  message: response.message,
+                  type: response.flag?'success':'error'
+              });
+              that.fetchData();
+            });
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消删除'
+            });          
+          });
+
+          
         }
     }
 
