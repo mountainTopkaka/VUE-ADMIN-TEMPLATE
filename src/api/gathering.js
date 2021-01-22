@@ -1,11 +1,14 @@
 import request from "@/utils/request"
 
+const url_group = 'gathering'
+const url_api = 'gathering';
+
 export default{
     // getList: function(){...}
     getList(){
         return request(
             {
-                url:'/gathering/gathering',
+                url:`/${url_group}/${url_api}`,
                 method:'get'
             }
         )
@@ -24,7 +27,7 @@ export default{
         // ES 6 模板方法
         return request(
             {
-                url:`/gathering/gathering/search/${page}/${size}`,
+                url:`/${url_group}/${url_api}/search/${page}/${size}`,
                 method:'post',
                 data:queryMap
             }
@@ -35,7 +38,7 @@ export default{
         // ES 6 模板方法
         return request(
             {
-                url:`/gathering/gathering/${id}`,
+                url:`/${url_group}/${url_api}/${id}`,
                 method:'get',
             }
         );
@@ -44,7 +47,7 @@ export default{
     save(pojo) {
         return request(
             {
-                url:'/gathering/gathering',
+                url:`/${url_group}/${url_api}`,
                 method:'post',
                 data:pojo
             }
@@ -55,7 +58,7 @@ export default{
         // ES 6 模板方法
         return request(
             {
-                url:`/gathering/gathering/${id}`,
+                url:`/${url_group}/${url_api}/${id}`,
                 method:'delete',
             }
         );
