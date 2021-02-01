@@ -36,28 +36,6 @@ export const constantRouterMap = [
       component: () => import('@/views/dashboard/index')
     }]
   },
-  {
-    path: '/basicInfo',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: '基本信息管理', icon: 'example' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: '城市管理', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: '标签管理', icon: 'tree' }
-      }
-    ]
-  },
-
   //活动管理
   {
     path: '/gathering',
@@ -72,7 +50,26 @@ export const constantRouterMap = [
     ]
   },
 
-
+  {
+    path: '/recurit',
+    component: Layout,
+    name: 'Recurit',
+    meta: { title: '招聘管理', icon: 'example' },
+    children: [
+      {
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/table/enterprise'),
+        meta: { title: '企业管理', icon: 'table' }
+      },
+      {
+        path: 'tree',
+        name: 'Tree',
+        component: () => import('@/views/table/recurit'),
+        meta: { title: '招聘信息', icon: 'table' }
+      }
+    ]
+  },
 
 
 
