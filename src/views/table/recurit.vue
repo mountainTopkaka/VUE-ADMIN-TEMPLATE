@@ -128,7 +128,7 @@
         <el-form-item label="职位要求"><el-input v-model="pojo.content2"></el-input></el-form-item>
 
         <el-button type="primary" @click="handleSave()">保存</el-button>
-        <el-button @click="dialogFormVisible = false" >关闭</el-button>
+        <el-button @click="dialogVisible = false" >关闭</el-button>
 
     </el-form>
   </el-dialog>
@@ -136,6 +136,7 @@
 </template>
 
 <script>
+import enterpriseApi from "@/api/enterprise";
 import recruitApi from "@/api/recruit";
 import cityApi from "@/api/city";
 export default {
@@ -152,6 +153,7 @@ export default {
       dialogVisible: false,
       pojo: {},
       cityList: [],
+      enterpriseList: []
     };
   },
 
@@ -159,6 +161,11 @@ export default {
     this.fetchData();
     let that = this;
     that.tableHeight = window.innerHeight - that.tableHeightSuffix;
+    enterpriseApi.getList().then(function(response){
+      if(response.flag) {
+        that.enterpriseList = response.data;
+      }
+    });
   },
 
   mounted() {

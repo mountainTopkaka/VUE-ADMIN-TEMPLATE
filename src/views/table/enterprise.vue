@@ -194,6 +194,7 @@ export default {
 
     handleSave() {
       var that = this;
+      debugger;
       enterpriseApi.save(this.pojo).then((response) => {
         if (response.flag) {
           that.pojo = [];
