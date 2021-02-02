@@ -71,6 +71,33 @@ export const constantRouterMap = [
     ]
   },
 
+  {
+    path: '/article',
+    component: Layout,
+    name: 'Article',
+    meta: { title: '文章管理', icon: 'tree' },
+    children: [
+      {
+        path: 'channel',
+        name: 'Channel',
+        component: () => import('@/views/table/channel'),
+        meta: { title: '频道管理', icon: 'table' }
+      },
+      {
+        path: 'article',
+        name: 'Article',
+        component: () => import('@/views/table/article'),
+        meta: { title: '文章审核', icon: 'form' }
+      },
+      {
+        path: 'column',
+        name: 'Column',
+        component: () => import('@/views/table/column'),
+        meta: { title: '专栏审核', icon: 'form' }
+      }
+    ]
+  },
+
 
 
 
