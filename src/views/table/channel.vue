@@ -40,7 +40,14 @@
   <el-dialog title="编辑" :visible.sync="dialogFormVisible">
     <el-form label-width="80px">
         <el-form-item label="频道名称"><el-input v-model="pojo.name"></el-input></el-form-item>
-        <el-form-item label="状态"><el-input v-model="pojo.state"></el-input></el-form-item>
+        <el-form-item label="状态">
+          <el-switch
+            v-model="pojo.state"
+            active-value="1"
+            inactive-value="0">
+          </el-switch>
+          <!-- <el-input v-model="pojo.state"></el-input> -->
+          </el-form-item>
 
         <el-button type="primary" @click="handleSave()">保存</el-button>
         <el-button @click="dialogFormVisible = false" >关闭</el-button>
