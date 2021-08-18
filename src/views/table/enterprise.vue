@@ -163,6 +163,7 @@ export default {
   },
   methods: {
     fetchData() {
+      debugger;
       var that = this;
 
       /* //ES6
