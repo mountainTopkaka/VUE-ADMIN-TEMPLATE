@@ -74,3 +74,27 @@ Pictured:
 [MIT](https://github.com/PanJiaChen/vue-admin-template/blob/master/LICENSE) license.
 
 Copyright (c) 2017-present PanJiaChen
+
+## 国际化设置
+打开src下的main.js 找到这句代码
+```js
+import locale from 'element‐ui/lib/locale/lang/en'
+```
+
+将en修改为zn-CN
+```js
+import locale from 'element‐ui/lib/locale/lang/zh‐CN'
+```
+修改后组件都是按照中文的习惯展示
+
+## 启动
+cnpm install 
+
+npm run dev
+
+## 使用模拟数据
+dev.env.js 中设置BASE_API:
+
+## 登录
+src/api/login.js
+

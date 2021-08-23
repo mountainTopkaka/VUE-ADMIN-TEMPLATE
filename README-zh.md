@@ -82,3 +82,19 @@ externals: {
 [MIT](https://github.com/PanJiaChen/vue-admin-template/blob/master/LICENSE) license.
 
 Copyright (c) 2017-present PanJiaChen
+
+
+## 关闭语法规范性检查
+修改config/index.js ，将useEslint的值改为false。
+
+## 国际化设置
+打开main.js 找到这句代码
+```js
+import locale from 'element‐ui/lib/locale/lang/en'
+```
+
+将en修改为zn-CN
+```js
+import locale from 'element‐ui/lib/locale/lang/zh‐CN'
+```
+修改后组件都是按照中文的习惯展示
