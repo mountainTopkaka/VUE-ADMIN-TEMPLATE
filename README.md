@@ -1,7 +1,7 @@
-<<<<<<< HEAD
+
 # VUE-ADMIN-TEMPLATE
 tens
-=======
+
 # vue-admin-template
 
 > A minimal vue admin template with Element UI & axios & iconfont & permission control & lint
@@ -78,4 +78,4 @@ Pictured:
 [MIT](https://github.com/PanJiaChen/vue-admin-template/blob/master/LICENSE) license.
 
 Copyright (c) 2017-present PanJiaChen
->>>>>>> 初始化
+
