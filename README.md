@@ -79,3 +79,35 @@ Pictured:
 
 Copyright (c) 2017-present PanJiaChen
 
+## 取消eslint的代码检查
+    在index.js文件中设置
+    useEslint: false
+
+## 国际化设置
+打开src下的main.js 找到这句代码
+```js
+import locale from 'element‐ui/lib/locale/lang/en'
+```
+
+将en修改为zn-CN
+```js
+import locale from 'element‐ui/lib/locale/lang/zh‐CN'
+```
+修改后组件都是按照中文的习惯展示
+
+## 启动
+cnpm install
+npm run dev
+
+### 如果报sass的错误
+Error: Node Sass does not yet support your current environment: Windows 64-bit
+解决方法(更新)
+```bash
+cnpm i node-sass -D
+```
+
+## 使用模拟数据
+dev.env.js 中设置BASE_API:
+
+## 登录
+src/api/login.js
