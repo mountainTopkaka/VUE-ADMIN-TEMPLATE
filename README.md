@@ -79,8 +79,19 @@ Pictured:
 
 Copyright (c) 2017-present PanJiaChen
 
-## 取消eslint的代码检查
-    在index.js文件中设置
+
+# 1-3 第1 2节
+经常用的
+  src下的
+    api
+    views
+要修改的一般就是
+  config目录下的js
+  以及路由，在src下的router目录
+
+### 取消eslint的代码检查
+  主要是规则提示太多，直接关掉
+    在config目录下的index.js文件中设置
     useEslint: false
 
 ## 国际化设置
@@ -94,6 +105,9 @@ import locale from 'element‐ui/lib/locale/lang/en'
 import locale from 'element‐ui/lib/locale/lang/zh‐CN'
 ```
 修改后组件都是按照中文的习惯展示
+
+## 配置 Easy mock BASE_API
+
 
 ## 启动
 cnpm install
@@ -111,3 +125,5 @@ dev.env.js 中设置BASE_API:
 
 ## 登录
 src/api/login.js
+
+
